@@ -11,7 +11,7 @@ $(document).ready(function(){
     exchangeRatePromise.then(function(exchangeRateResponse) {
       if(exchangeRateResponse instanceof Error){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse.message}`);
-      }
+      } else if { exchangeRateResponse.result}
       console.log(exchangeRateResponse);
     })
     .catch(function(error) {
