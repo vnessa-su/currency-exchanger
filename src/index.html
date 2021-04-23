@@ -15,8 +15,16 @@
       <div class="form-group form-inline">
         <label for="amountInput" class="form-label">Amount</label>
         <input class="form-control" type="text" id="amountInput">
-        <button type="button" class="btn btn-primary" id="submitAmountButton">Submit</button>
+        
+        <select class="form-control" id="originalCurrencySelect">
+          <option value="" selected disabled>Currency Type</option>
+        </select>
+        <label for="currencySelect" class="form-label">to</label>
+        <select class="form-control" id="targetCurrencySelect">
+          <option value="" selected disabled>Currency Type</option>
+        </select>
       </div>
+      <button type="button" class="btn btn-primary" id="submitAmountButton">Convert Amount</button>
     </form>
   </div>
   <p id="errorDisplay"></p>
