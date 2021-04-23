@@ -16,16 +16,17 @@ $(document).ready(function(){
     if(!amount || amount < 0 || !originalCurrency || !targetCurrency){
       $("#inputError").text("Invalid input");
     }
+    
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
       if(exchangeRateResponse instanceof Error){
-        throw Error(`ExchangeRate-API Error: ${exchangeRateResponse.message}`);
+        throw Error(`Request ${exchangeRateResponse.message}`);
       }
       ExchangeRateApi.checkForResponseError(exchangeRateResponse);
       displaySingleConversion(amount, exchangeRateResponse);
     })
     .catch(function(error){
-      $("#errorDisplay").text(error.message);
+      $("#errorDisplay").text(`Conversion Error: ${error.message}`);
       $("#resultsDisplay").html("");
     });
   });
@@ -35,7 +36,7 @@ function populateCurrencies(){
   let supportedCurrenciesPromise = ExchangeRateApi.getAllSupportedCurrencies();
   supportedCurrenciesPromise.then(function(supportedCurrenciesResponse){
     if(supportedCurrenciesResponse instanceof Error){
-      throw Error(`ExchangeRate-API Error: ${supportedCurrenciesResponse.message}`);
+      throw Error(`ExchangeRate-API Request Error: ${supportedCurrenciesResponse.message}`);
     }
     ExchangeRateApi.checkForResponseError(supportedCurrenciesResponse);
     return supportedCurrenciesResponse.supported_codes;
