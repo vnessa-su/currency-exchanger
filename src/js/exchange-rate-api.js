@@ -3,19 +3,31 @@ export default class ExchangeRateApi{
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${originalCurrency}/${targetCurrency}/${amount}`;
     return fetch(url)
       .then(function(response){
-        const dataFromResponse = this.checkForResponseErrors(response);
-        return dataFromResponse;
+        if(!response.ok){
+          throw Error(response.statusText);
+        }
+        return response.json();
       })
       .catch(function(error){
         return Error(error);
       });
   }
 
-  static checkForResponseErrors(response){
-    const data = response.json();
-    if(!response.ok){
-      throw Error(response.statusText);
-    }
+  static getAllSupportedCurrencies(){
+    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`;
+    return fetch(url)
+      .then(function(response){
+        if(!response.ok){
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function(error){
+        return Error(error);
+      });
+  }
+  
+  static checkForResponseError(data){
     if(data.result === "error"){
       const errorType = data["error-type"];
       switch(errorType){
@@ -33,6 +45,5 @@ export default class ExchangeRateApi{
           throw Error("Unknown Error");
       }
     }
-    return data;
   }
 }

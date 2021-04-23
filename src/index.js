@@ -19,37 +19,38 @@ $(document).ready(function(){
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
       if(exchangeRateResponse instanceof Error){
-        throw Error(`ExchangeRate-API error: ${exchangeRateResponse.message}`);
-      } else if(exchangeRateResponse.result === "error"){
-        throw Error(`ExchangeRate-API error: ${exchangeRateResponse["error-type"]}`);
+        throw Error(`ExchangeRate-API Error: ${exchangeRateResponse.message}`);
       }
+      ExchangeRateApi.checkForResponseError(exchangeRateResponse);
       displaySingleConversion(amount, exchangeRateResponse);
     })
     .catch(function(error){
       $("#errorDisplay").text(error.message);
-      $("#resultsDisplay").html("")
+      $("#resultsDisplay").html("");
     });
   });
 });
 
 function populateCurrencies(){
-  const currencies = [
-    ["USD", "United States Dollar", "&#36;"], 
-    ["EUR", "Euro - European Union", "&#8364;"], 
-    ["GBP", "Pound Sterling - United Kingdom", "&#163;"], 
-    ["CNY", "Chinese Renminbi", "&#20803;"], 
-    ["JPY", "Japanese Yen", "&#165;"], 
-    ["KRW", "South Korean Won", "&#8361;"], 
-    ["AUD", "Australian Dollar", "&#36;"]
-  ];
-
-  currencies.forEach(element => {
-    const currencyCode = element[0];
-    const currencyTitle = element[1];
-    // const currencySymbol = element[2];
-    const htmlString = `<option value="${currencyCode}" title="${currencyTitle}">${currencyCode}</option>`;
-    $("#originalCurrencySelect").append(htmlString);
-    $("#targetCurrencySelect").append(htmlString);
+  let supportedCurrenciesPromise = ExchangeRateApi.getAllSupportedCurrencies();
+  supportedCurrenciesPromise.then(function(supportedCurrenciesResponse){
+    if(supportedCurrenciesResponse instanceof Error){
+      throw Error(`ExchangeRate-API Error: ${supportedCurrenciesResponse.message}`);
+    }
+    ExchangeRateApi.checkForResponseError(supportedCurrenciesResponse);
+    return supportedCurrenciesResponse.supported_codes;
+  })
+  .then(function(currencies){
+    currencies.forEach(element => {
+      const currencyCode = element[0];
+      const currencyTitle = element[1];
+      const htmlString = `<option value="${currencyCode}" title="${currencyTitle}">${currencyCode}</option>`;
+      $("#originalCurrencySelect").append(htmlString);
+      $("#targetCurrencySelect").append(htmlString);
+    });
+  })
+  .catch(function(error){
+    $("#errorDisplay").text(`Get Currencies Error: ${error.message}`);
   });
 }
 
