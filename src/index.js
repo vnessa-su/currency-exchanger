@@ -9,7 +9,6 @@ $(document).ready(function(){
     const amount = parseFloat($("#amountInput").val());
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo("EUR", "GBP", amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
-      console.log(exchangeRateResponse);
       if(exchangeRateResponse instanceof Error){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse.message}`);
       } else if(exchangeRateResponse.result){
@@ -17,7 +16,7 @@ $(document).ready(function(){
       }
     })
     .catch(function(error){
-      $("#errorDisplay").text(error);
+      $("#errorDisplay").text(error.message);
     });
   });
 });
