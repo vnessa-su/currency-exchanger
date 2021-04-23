@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "jest --coverage",
     "build": "webpack --mode=development",
     "start": "npm run build; webpack-dev-server --open --mode development",
@@ -21,6 +23,7 @@
     "eslint": "^6.3.0",
     "eslint-loader": "^3.0.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^3.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",

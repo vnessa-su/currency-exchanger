@@ -1,18 +1,23 @@
 # Currency Exchanger
 
-#### _{Brief description of application},{Date of current version}_
+#### Converts an amount from one currency to another and calls the ExchangeRate API.
 
-#### To see my live website go to {GH_PAGES_LINK_HERE}!
+#### To see my live website go to [https://vnessa-su.github.io/currency-exchanger/](https://vnessa-su.github.io/currency-exchanger/)
 
 #### By Vanessa Su
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+A user is able to input an amount, select the currency and then convert it into another selected currency. This application calls the [ExchangeRate API](https://www.exchangerate-api.com/) to calculate the conversion and populate the list of available currencies.
 
 ## User Story
 
-* _{As a user I want to be able to...}_
+* Input an amount
+* Choose the currency of the amount
+* Choose the currency to convert to
+* Press the Convert Amount button
+* Display the original amount and currency, as well as the converted amount and currency
+* Display any input, API fetch, and response errors
 
 ## Technologies Used
 
@@ -49,11 +54,11 @@ _{This is a detailed description of your application. Give as much detail as nee
 4. `Your API Key` will be displayed in the `API Access` section
 5. Create a .env file in the `/currency-exchanger` directory
 6. Open the .env file in your text editor
-7. Add `EXCHANGE_RATE_API_KEY={Your API Key Here}` to the file, replacing `{Your Api Key Here}` with the API key found in step 4
+7. Add `API_KEY={Your API Key Here}` to the file, replacing `{Your Api Key Here}` with the API key found in step 4
 
 ## Known Bugs
 
-_No known bugs_
+* When running on developement server the head icon doesn't load
 
 ## Contact Information
 
