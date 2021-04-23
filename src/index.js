@@ -10,6 +10,12 @@ $(document).ready(function(){
     const amount = parseFloat($("#amountInput").val());
     const originalCurrency = $("#originalCurrencySelect").val();
     const targetCurrency = $("#targetCurrencySelect").val();
+
+    $("#inputError").text("");
+    $("#errorDisplay").text("");
+    if(!amount || amount < 0 || !originalCurrency || !targetCurrency){
+      $("#inputError").text("Invalid input");
+    }
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
       if(exchangeRateResponse instanceof Error){
