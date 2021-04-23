@@ -5,16 +5,18 @@ import $ from 'jquery';
 import ExchangeRateApi from './js/exchange-rate-api.js';
 
 $(document).ready(function(){
-  $("#submitAmountButton").click(function() {
+  $("#submitAmountButton").click(function(){
     const amount = parseFloat($("#amountInput").val());
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo("EUR", "GBP", amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
+      console.log(exchangeRateResponse);
       if(exchangeRateResponse instanceof Error){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse.message}`);
-      } else if { exchangeRateResponse.result}
-      console.log(exchangeRateResponse);
+      } else if(exchangeRateResponse.result){
+        throw Error(`ExchangeRate-API error: ${exchangeRateResponse["error-type"]}`);
+      }
     })
-    .catch(function(error) {
+    .catch(function(error){
       $("#errorDisplay").text(error);
     });
   });
