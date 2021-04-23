@@ -8,13 +8,16 @@ $(document).ready(function(){
   populateCurrencies();
   $("#submitAmountButton").click(function(){
     const amount = parseFloat($("#amountInput").val());
-    let exchangeRatePromise = ExchangeRateApi.convertAmountTo("EUR", "GBP", amount);
+    const originalCurrency = $("#originalCurrencySelect").val();
+    const targetCurrency = $("#targetCurrencySelect").val();
+    let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
     exchangeRatePromise.then(function(exchangeRateResponse) {
       if(exchangeRateResponse instanceof Error){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse.message}`);
-      } else if(exchangeRateResponse.result){
+      } else if(exchangeRateResponse.result === "error"){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse["error-type"]}`);
       }
+      console.log(exchangeRateResponse);
     })
     .catch(function(error){
       $("#errorDisplay").text(error.message);
@@ -37,7 +40,7 @@ function populateCurrencies(){
     const currencyCode = element[0];
     const currencyTitle = element[1];
     // const currencySymbol = element[2];
-    const htmlString = `<option value="${currencyCode} title="${currencyTitle}">${currencyCode}</option>`;
+    const htmlString = `<option value="${currencyCode}" title="${currencyTitle}">${currencyCode}</option>`;
     $("#originalCurrencySelect").append(htmlString);
     $("#targetCurrencySelect").append(htmlString);
   });
