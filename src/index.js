@@ -17,10 +17,11 @@ $(document).ready(function(){
       } else if(exchangeRateResponse.result === "error"){
         throw Error(`ExchangeRate-API error: ${exchangeRateResponse["error-type"]}`);
       }
-      console.log(exchangeRateResponse);
+      displaySingleConversion(amount, exchangeRateResponse);
     })
     .catch(function(error){
       $("#errorDisplay").text(error.message);
+      $("#resultsDisplay").html("")
     });
   });
 });
@@ -44,4 +45,12 @@ function populateCurrencies(){
     $("#originalCurrencySelect").append(htmlString);
     $("#targetCurrencySelect").append(htmlString);
   });
+}
+
+function displaySingleConversion(amount, response){
+  const originalCode = response.base_code;
+  const targetCode = response.target_code;
+  const convertedAmount = response.conversion_result.toFixed(2);
+  const htmlString = `<p>${amount.toFixed(2)} ${originalCode} &rarr; ${convertedAmount} ${targetCode}</p>`;
+  $("#resultsDisplay").html(htmlString);
 }
