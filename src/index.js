@@ -38,6 +38,10 @@ $(document).ready(function(){
     $("#targetCurrencySelect").val("");
     $("#resultsDisplay").html("");
   });
+
+  $("#amountInput").focus(function(){
+    this.select();
+  });
 });
 
 function populateCurrencies(){
