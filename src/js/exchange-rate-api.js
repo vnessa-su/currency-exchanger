@@ -1,63 +1,63 @@
-export default class ExchangeRateApi{
-  static convertAmountTo(originalCurrency, targetCurrency, amount){
+export default class ExchangeRateApi {
+  static convertAmountTo(originalCurrency, targetCurrency, amount) {
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${originalCurrency}/${targetCurrency}/${amount}`;
     return fetch(url)
-      .then(function(response){
-        if(!response.ok){
+      .then(function (response) {
+        if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .catch(function(error){
+      .catch(function (error) {
         return Error(error);
       });
   }
 
-  static getAllSupportedCurrencies(){
+  static getAllSupportedCurrencies() {
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`;
     return fetch(url)
-      .then(function(response){
-        if(!response.ok){
+      .then(function (response) {
+        if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .catch(function(error){
+      .catch(function (error) {
         return Error(error);
       });
   }
 
-  static getAllConversionRates(targetCurrency){
+  static getAllConversionRates(targetCurrency) {
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/${targetCurrency}`;
     return fetch(url)
-      .then(function(response){
-        if(!response.ok){
+      .then(function (response) {
+        if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .catch(function(error){
+      .catch(function (error) {
         return Error(error);
       });
   }
 
-  static convertAmountToAllCurrencies(amount, conversionRatesMap){
-    if(!amount || amount < 0){
+  static convertAmountToAllCurrencies(amount, conversionRatesMap) {
+    if (!amount || amount < 0) {
       throw Error(`Invalid Amount Input - needs to be a number greater than 0`);
     } else {
       let convertedAmountMap = new Map();
-      conversionRatesMap.forEach(function(conversionRate, currency){
+      conversionRatesMap.forEach(function (conversionRate, currency) {
         const convertedAmount = conversionRate * amount;
         convertedAmountMap.set(currency, convertedAmount);
       });
       return convertedAmountMap;
     }
   }
-  
-  static checkForResponseError(data){
-    if(data.result === "error"){
+
+  static checkForResponseError(data) {
+    if (data.result === "error") {
       const errorType = data["error-type"];
-      switch(errorType){
+      switch (errorType) {
         case "unsupported-code":
           throw Error("Unsupported Currency Code");
         case "malformed-request":
