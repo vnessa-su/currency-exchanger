@@ -57,6 +57,7 @@ function populateCurrencies(){
 
 function clearErrorDisplays(){
   $("#amountInput").removeClass("is-invalid");
+  $("#amountInput").removeClass("text-danger");
   $("#originalCurrencySelect").removeClass("is-invalid");
 
   $("#targetCurrencySelect").removeClass("is-invalid");
@@ -68,6 +69,7 @@ function checkAmountFormInput(amountInput, currencyInput){
   if(!amountInput || amountInput < 0){
     $("#amountInput").val("Invalid Amount");
     $("#amountInput").addClass("is-invalid");
+    $("#amountInput").addClass("text-danger");
   }
   if(!currencyInput){
     $("#originalCurrencySelect").addClass("is-invalid");
