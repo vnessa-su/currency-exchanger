@@ -44,7 +44,10 @@ $(document).ready(function(){
         throw Error(`Request ${conversionRatesResponse.message}`);
       }
       ExchangeRateApi.checkForResponseError(conversionRatesResponse);
-      console.log(conversionRatesResponse.conversion_rates);
+      const allConversionRatesObject = conversionRatesResponse.conversion_rates;
+      const allConversionRatesMap = new Map(Object.entries(allConversionRatesObject));
+      const amountConvertedToAllCurrenciesMap = ExchangeRateApi.convertAmountToAllCurrencies(amount, allConversionRatesMap);
+      displayAllConvertedAmounts(amountConvertedToAllCurrenciesMap, originalCurrency);
     })
     .catch(function(error){
       $("#errorDisplay").text(`All Currencies Conversion Error: ${error.message}`);
@@ -113,6 +116,18 @@ function displaySingleConversion(amount, response){
   const originalCode = response.base_code;
   const targetCode = response.target_code;
   const convertedAmount = response.conversion_result.toFixed(2);
-  const htmlString = `<p>${amount.toFixed(2)} ${originalCode} &rarr; ${convertedAmount} ${targetCode}</p>`;
+  const htmlString = `<p>${amount.toFixed(2)} ${originalCode} &#8658; ${convertedAmount} ${targetCode}</p>`;
   $("#resultsDisplay").html(htmlString);
+}
+
+function displayAllConvertedAmounts(convertedAmountMap, targetCurrency){
+  let htmlString = ""
+  convertedAmountMap.forEach(function(amount, currency){
+    if(currency === targetCurrency){
+      htmlString = `${amount.toFixed(2)} ${currency}` + htmlString;
+    } else {
+      htmlString += `<br>&#8658; ${amount.toFixed(2)} ${currency}`;
+    }
+  });
+  $("#resultsDisplay").html(`<p>${htmlString}</p>`);
 }

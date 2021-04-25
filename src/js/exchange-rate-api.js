@@ -42,12 +42,16 @@ export default class ExchangeRateApi{
   }
 
   static convertAmountToAllCurrencies(amount, conversionRatesMap){
-    let convertedAmountMap = new Map();
-    conversionRatesMap.forEach(function(conversionRate, currency){
-      const convertedAmount = conversionRatesMap * amount;
-      convertedAmountMap.set(currency, convertedAmount);
-    });
-    return convertedAmountMap;
+    if(!amount || amount < 0){
+      throw Error(`Invalid Amount Input - needs to be a number greater than 0`);
+    } else {
+      let convertedAmountMap = new Map();
+      conversionRatesMap.forEach(function(conversionRate, currency){
+        const convertedAmount = conversionRate * amount;
+        convertedAmountMap.set(currency, convertedAmount);
+      });
+      return convertedAmountMap;
+    }
   }
   
   static checkForResponseError(data){
