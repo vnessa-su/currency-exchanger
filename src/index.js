@@ -17,16 +17,37 @@ $(document).ready(function(){
       $("#targetCurrencySelect").addClass("is-invalid");
     }
     
-    let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
-    exchangeRatePromise.then(function(exchangeRateResponse) {
-      if(exchangeRateResponse instanceof Error){
-        throw Error(`Request ${exchangeRateResponse.message}`);
+    let singleConversionPromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
+    singleConversionPromise.then(function(singleConversionResponse) {
+      if(singleConversionResponse instanceof Error){
+        throw Error(`Request ${singleConversionResponse.message}`);
       }
-      ExchangeRateApi.checkForResponseError(exchangeRateResponse);
-      displaySingleConversion(amount, exchangeRateResponse);
+      ExchangeRateApi.checkForResponseError(singleConversionResponse);
+      displaySingleConversion(amount, singleConversionResponse);
     })
     .catch(function(error){
       $("#errorDisplay").text(`Conversion Error: ${error.message}`);
+      $("#resultsDisplay").html("");
+    });
+  });
+
+  $("#convertToAllButton").click(function(){
+    const amount = parseFloat($("#amountInput").val());
+    const originalCurrency = $("#originalCurrencySelect").val();
+
+    clearErrorDisplays();
+    checkAmountFormInput(amount, originalCurrency);
+
+    let allConversionRatesPromise = ExchangeRateApi.getAllConversionRates(originalCurrency);
+    allConversionRatesPromise.then(function(conversionRatesResponse){
+      if(conversionRatesResponse instanceof Error){
+        throw Error(`Request ${conversionRatesResponse.message}`);
+      }
+      ExchangeRateApi.checkForResponseError(conversionRatesResponse);
+      console.log(conversionRatesResponse.conversion_rates);
+    })
+    .catch(function(error){
+      $("#errorDisplay").text(`All Currencies Conversion Error: ${error.message}`);
       $("#resultsDisplay").html("");
     });
   });
