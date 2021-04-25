@@ -13,8 +13,10 @@ $(document).ready(function(){
 
     $("#inputError").text("");
     $("#errorDisplay").text("");
-    if(!amount || amount < 0 || !originalCurrency || !targetCurrency){
-      $("#inputError").text("Invalid input");
+    checkAmountFormInput(amount, originalCurrency);
+    if(!targetCurrency){
+      $("#targetCurrencyError").text("Please select a currency");
+      $("#targetCurrencySelect").addClass("is-invalid");
     }
     
     let exchangeRatePromise = ExchangeRateApi.convertAmountTo(originalCurrency, targetCurrency, amount);
@@ -53,6 +55,17 @@ function populateCurrencies(){
   .catch(function(error){
     $("#errorDisplay").text(`Get Currencies Error: ${error.message}`);
   });
+}
+
+function checkAmountFormInput(amountInput, currencyInput){
+  if(!amountInput || amountInput < 0){
+    $("#amountInput").val("Invalid Amount");
+    $("#amountInput").addClass("is-invalid");
+  }
+  if(!currencyInput){
+    $("#amountErrorDisplay").text("Please select a currency");
+    $("#originalCurrencySelect").addClass("is-invalid");
+  }
 }
 
 function displaySingleConversion(amount, response){
