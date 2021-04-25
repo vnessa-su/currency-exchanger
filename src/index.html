@@ -13,9 +13,9 @@
   <div class="container mx-auto">
     <form id="userInputForm">
       <div class="form-group form-inline d-flex align-items-start">
-        <label for="amountInput" class="form-label pt-2">Amount:</label>
-        <input class="form-control" type="text" id="amountInput">
-        <div class="has-validation">
+        <label for="amountInput" class="form-label px-3 pt-2">Amount:</label>
+        <input class="form-control px-3" type="text" id="amountInput">
+        <div class="has-validation px-1">
           <select class="form-control" id="originalCurrencySelect">
             <option value="" selected disabled>Currency Type</option>
           </select>
@@ -23,15 +23,15 @@
         </div>
       </div>
       <div class="form-group form-inline d-flex align-items-start">
-        <label for="currencySelect" class="form-label pt-2">Convert to: </label>
-        <div class="has-validation">
+        <label for="currencySelect" class="form-label pt-2  px-2">Convert to: </label>
+        <div class="has-validation  px-1">
           <select class="form-control" id="targetCurrencySelect">
             <option value="" selected disabled>Currency Type</option>
           </select>
           <p class="invalid-feedback" id="targetCurrencyError">Please select currency</p>
         </div>
-        <button type="button" class="btn btn-primary" id="submitAmountButton">Convert</button>
-        <button type="button" class="btn btn-primary" id="convertToAllButton">Convert to All Currencies</button>
+        <button type="button" class="btn btn-primary ml-3" id="submitAmountButton">Convert</button>
+        <button type="button" class="btn btn-primary mx-2" id="convertToAllButton">Convert to All Currencies</button>
       </div>
       <button type="button" class="btn btn-primary" id="clearFormButton">Clear Form</button>
     </form>
