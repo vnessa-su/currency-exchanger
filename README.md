@@ -8,16 +8,18 @@
 
 ## Description
 
-A user is able to input an amount, select the currency and then convert it into another selected currency. This application calls the [ExchangeRate API](https://www.exchangerate-api.com/) to calculate the conversion and populate the list of available currencies.
+A user is able to input an amount, select the currency and then convert it into another selected currency or convert into all available currencies. This application calls the [ExchangeRate API](https://www.exchangerate-api.com/) to calculate the conversion, get conversion rates, and populate the list of available currencies.
 
 ## User Story
 
 * Input an amount
 * Choose the currency of the amount
 * Choose the currency to convert to
-* Press the Convert Amount button
+* Press the `Convert` button to convert amount to target currency
+* Press the `Conver to All Currencies` button to convert to all available currencies
 * Display the original amount and currency, as well as the converted amount and currency
 * Display any input, API fetch, and response errors
+* Press the `Clear Form` to clear form and displays
 
 ## Technologies Used
 
@@ -58,7 +60,7 @@ A user is able to input an amount, select the currency and then convert it into 
 
 ## Known Bugs
 
-* When running on developement server the head icon doesn't load
+_No known bugs_
 
 ## Contact Information
 
