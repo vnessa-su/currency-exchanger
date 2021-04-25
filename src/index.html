@@ -12,20 +12,24 @@
   <h1 class="text-center p-4 page-header">Currency Exchanger</h1>
   <div class="container mx-auto">
     <form id="userInputForm">
-      <div class="form-group form-inline">
-        <label for="amountInput" class="form-label">Amount:</label>
+      <div class="form-group form-inline d-flex align-items-start">
+        <label for="amountInput" class="form-label pt-2">Amount:</label>
         <input class="form-control" type="text" id="amountInput">
-        <select class="form-control" id="originalCurrencySelect">
-          <option value="" selected disabled>Currency Type</option>
-        </select>
-        <p id="amountErrorDisplay"></p>
+        <div class="has-validation">
+          <select class="form-control" id="originalCurrencySelect">
+            <option value="" selected disabled>Currency Type</option>
+          </select>
+          <p class="invalid-feedback" id="amountErrorDisplay">Please select currency</p>
+        </div>
       </div>
-      <div class="form-group form-inline">
-        <label for="currencySelect" class="form-label">Convert to: </label>
-        <select class="form-control" id="targetCurrencySelect">
-          <option value="" selected disabled>Currency Type</option>
-        </select>
-        <p id="targetCurrencyError"></p>
+      <div class="form-group form-inline d-flex align-items-start">
+        <label for="currencySelect" class="form-label pt-2">Convert to: </label>
+        <div class="has-validation">
+          <select class="form-control" id="targetCurrencySelect">
+            <option value="" selected disabled>Currency Type</option>
+          </select>
+          <p class="invalid-feedback" id="targetCurrencyError">Please select currency</p>
+        </div>
         <button type="button" class="btn btn-primary" id="submitAmountButton">Convert</button>
         <button type="button" class="btn btn-primary" id="convertToAllButton">Convert to All Currencies</button>
       </div>

@@ -14,7 +14,6 @@ $(document).ready(function(){
     clearErrorDisplays();
     checkAmountFormInput(amount, originalCurrency);
     if(!targetCurrency){
-      $("#targetCurrencyError").text("Please select a currency");
       $("#targetCurrencySelect").addClass("is-invalid");
     }
     
@@ -59,11 +58,9 @@ function populateCurrencies(){
 function clearErrorDisplays(){
   $("#amountInput").removeClass("is-invalid");
   $("#originalCurrencySelect").removeClass("is-invalid");
-  $("#amountErrorDisplay").text("");
 
   $("#targetCurrencySelect").removeClass("is-invalid");
-  $("#targetCurrencyError").text("");
-  
+
   $("#errorDisplay").text("");
 }
 
@@ -73,7 +70,6 @@ function checkAmountFormInput(amountInput, currencyInput){
     $("#amountInput").addClass("is-invalid");
   }
   if(!currencyInput){
-    $("#amountErrorDisplay").text("Please select a currency");
     $("#originalCurrencySelect").addClass("is-invalid");
   }
 }
