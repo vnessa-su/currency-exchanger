@@ -6,6 +6,7 @@ import ExchangeRateApi from './js/exchange-rate-api.js';
 
 $(document).ready(function(){
   populateCurrencies();
+
   $("#submitAmountButton").click(function(){
     const amount = parseFloat($("#amountInput").val());
     const originalCurrency = $("#originalCurrencySelect").val();
@@ -126,7 +127,11 @@ function displayAllConvertedAmounts(convertedAmountMap, targetCurrency){
     if(currency === targetCurrency){
       htmlString = `${amount.toFixed(2)} ${currency}` + htmlString;
     } else {
-      htmlString += `<br>&#8658; ${amount.toFixed(2)} ${currency}`;
+      htmlString += `<div class="row">
+        <div class="col-1">&#8658;</div>
+        <div class="col-5">${amount.toFixed(2)}</div>
+        <div class="col-6">${currency}</div>
+        </div>`;
     }
   });
   $("#resultsDisplay").html(`<p>${htmlString}</p>`);
