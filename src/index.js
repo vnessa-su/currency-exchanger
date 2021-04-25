@@ -30,6 +30,14 @@ $(document).ready(function(){
       $("#resultsDisplay").html("");
     });
   });
+
+  $("#clearFormButton").click(function(){
+    clearErrorDisplays();
+    $("#amountInput").val("");
+    $("#originalCurrencySelect").val("");
+    $("#targetCurrencySelect").val("");
+    $("#resultsDisplay").html("");
+  });
 });
 
 function populateCurrencies(){
