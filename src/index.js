@@ -11,8 +11,7 @@ $(document).ready(function(){
     const originalCurrency = $("#originalCurrencySelect").val();
     const targetCurrency = $("#targetCurrencySelect").val();
 
-    $("#inputError").text("");
-    $("#errorDisplay").text("");
+    clearErrorDisplays();
     checkAmountFormInput(amount, originalCurrency);
     if(!targetCurrency){
       $("#targetCurrencyError").text("Please select a currency");
@@ -55,6 +54,17 @@ function populateCurrencies(){
   .catch(function(error){
     $("#errorDisplay").text(`Get Currencies Error: ${error.message}`);
   });
+}
+
+function clearErrorDisplays(){
+  $("#amountInput").removeClass("is-invalid");
+  $("#originalCurrencySelect").removeClass("is-invalid");
+  $("#amountErrorDisplay").text("");
+
+  $("#targetCurrencySelect").removeClass("is-invalid");
+  $("#targetCurrencyError").text("");
+  
+  $("#errorDisplay").text("");
 }
 
 function checkAmountFormInput(amountInput, currencyInput){
