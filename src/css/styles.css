@@ -1,4 +1,24 @@
 .page-background {
   background-image: url('./../../assets/images/coins-cottonbro.jpg');
   background-size: cover;
+  background-attachment: fixed;
+}
+
+.page-header {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.content-container {
+  font-family: 'Space Mono', monospace;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 30px;
+  max-width: 950px;
+  min-height: 450px;
+}
+
+.form-input{
+  max-width: 200px;
 }
