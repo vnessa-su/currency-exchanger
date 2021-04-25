@@ -13,20 +13,22 @@
   <div class="container mx-auto">
     <form id="userInputForm">
       <div class="form-group form-inline">
-        <label for="amountInput" class="form-label">Amount</label>
+        <label for="amountInput" class="form-label">Amount:</label>
         <input class="form-control" type="text" id="amountInput">
-        
         <select class="form-control" id="originalCurrencySelect">
           <option value="" selected disabled>Currency Type</option>
         </select>
-        <label for="currencySelect" class="form-label">to</label>
+        <p id="amountErrorDisplay"></p>
+      </div>
+      <div class="form-group form-inline">
+        <label for="currencySelect" class="form-label">Convert to: </label>
         <select class="form-control" id="targetCurrencySelect">
           <option value="" selected disabled>Currency Type</option>
         </select>
-
-        <p id="inputError"></p>
+        <p id="targetCurrencyError"></p>
+        <button type="button" class="btn btn-primary" id="submitAmountButton">Convert Amount</button>
       </div>
-      <button type="button" class="btn btn-primary" id="submitAmountButton">Convert Amount</button>
+      <button type="button" class="btn btn-primary" id="convertToAllButton">Convert Amount to All Currencies</button>
     </form>
   </div>
   <div id="resultsDisplay"></div>
