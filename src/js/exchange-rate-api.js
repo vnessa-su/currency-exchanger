@@ -40,6 +40,15 @@ export default class ExchangeRateApi{
         return Error(error);
       });
   }
+
+  static convertAmountToAllCurrencies(amount, conversionRatesMap){
+    let convertedAmountMap = new Map();
+    conversionRatesMap.forEach(function(conversionRate, currency){
+      const convertedAmount = conversionRatesMap * amount;
+      convertedAmountMap.set(currency, convertedAmount);
+    });
+    return convertedAmountMap;
+  }
   
   static checkForResponseError(data){
     if(data.result === "error"){
