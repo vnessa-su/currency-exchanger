@@ -4,32 +4,46 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Space+Mono&display=swap" rel="stylesheet">
   
   <title>Currency Exchanger</title>
   <link rel="icon" href="./favicon.ico">
 <link rel="shortcut icon" href="favicon.ico"></head>
 <body class="page-background">
   <h1 class="text-center p-4 page-header">Currency Exchanger</h1>
-  <div class="container mx-auto">
+  <div class="container mx-auto content-container rounded">
     <form id="userInputForm">
-      <div class="form-group form-inline">
-        <label for="amountInput" class="form-label">Amount</label>
-        <input class="form-control" type="text" id="amountInput">
-        
-        <select class="form-control" id="originalCurrencySelect">
-          <option value="" selected disabled>Currency Type</option>
-        </select>
-        <label for="currencySelect" class="form-label">to</label>
-        <select class="form-control" id="targetCurrencySelect">
-          <option value="" selected disabled>Currency Type</option>
-        </select>
-
-        <p id="inputError"></p>
+      <div class="form-group form-inline d-flex align-items-start">
+        <label for="amountInput" class="form-label px-3 pt-2 font-weight-bold mt-1">Amount:</label>
+        <input class="form-control form-control-lg px-3 mt-1 form-input" type="text" id="amountInput">
+        <div class="has-validation px-1">
+          <select class="form-control form-control-lg mt-1" id="originalCurrencySelect">
+            <option value="" selected disabled>Currency Type</option>
+          </select>
+          <p class="invalid-feedback" id="amountErrorDisplay">Please select currency</p>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" id="submitAmountButton">Convert Amount</button>
+
+      <div class="form-group form-inline d-flex align-items-start">
+        <label for="currencySelect" class="form-label pt-2 px-2 font-weight-bold mt-1">Convert to: </label>
+        <div class="has-validation  px-1">
+          <select class="form-control form-control-lg mt-1" id="targetCurrencySelect">
+            <option value="" selected disabled>Currency Type</option>
+          </select>
+          <p class="invalid-feedback" id="targetCurrencyError">Please select currency</p>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg ml-3 mt-1" id="submitAmountButton">Convert</button>
+        <button type="button" class="btn btn-primary btn-lg ml-3 mt-1" id="convertToAllButton">Convert to All Currencies</button>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-lg ml-3" id="clearFormButton">Clear Form</button>
     </form>
+    <hr>
+    <div id="resultsDisplay" class="px-5"></div>
+    <p id="errorDisplay" class="text-danger"></p>
   </div>
-  <div id="resultsDisplay"></div>
-  <p id="errorDisplay"></p>
 <script type="text/javascript" src="bundle.js"></script></body>
 </html>
