@@ -19,7 +19,7 @@ A user is able to input an amount, select the currency and then convert it into 
 * Press the `Conver to All Currencies` button to convert to all available currencies
 * Display the original amount and currency, as well as the converted amount and currency
 * Display any input, API fetch, and response errors
-* Press the `Clear Form` to clear form and displays
+* Press the `Clear Form` to clear the form and any displayed information
 
 ## Technologies Used
 
